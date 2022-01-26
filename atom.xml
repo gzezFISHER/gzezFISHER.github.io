@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Fisher&#39;s blog</title>
+  
+  <subtitle>OIer</subtitle>
+  <link href="https://gzezfisher.top/atom.xml" rel="self"/>
+  
+  <link href="https://gzezfisher.top/"/>
+  <updated>2022-01-26T09:13:44.577Z</updated>
+  <id>https://gzezfisher.top/</id>
+  
+  <author>
+    <name>Fisher</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CF717A Festival Organization</title>
+    <link href="https://gzezfisher.top/2022/01/26/cf717a/"/>
+    <id>https://gzezfisher.top/2022/01/26/cf717a/</id>
+    <published>2022-01-26T08:34:11.000Z</published>
+    <updated>2022-01-26T09:13:44.577Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>一个合法的串定义为：长度在 $[l, r]$ 之间，且只含 $0,1$，并且不存在连续 $2$ 个或更多的 $0$.</p><p>现在要选出 $k$ 个长度相同的不同的合法的串，问有几种选法，答案模 $10^9+7$.</p><p>$1\le l\le r\le10^{18}, 1\le k\le200$.<br><span id="more"></span></p><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>设 $F_{i,j}$ 表示长度为 $i$, 以 $j$ 结尾的合法串个数.<br>有 <script type="math/tex">\left\{      \begin{array}{**lr**}      F_{i,0}=F_{i-1,1} &  \\      F_{i,1}=F_{i-1,0}+F_{i-1,1} &     \end{array}  \right.</script><br>即 <script type="math/tex">\left\{      \begin{array}{**lr**}      F_{i,0}=\text{Fib}_{i} &  \\      F_{i,1}=\text{Fib}_{i+1} &     \end{array}  \right.</script><br>所以答案 <script type="math/tex">\text{Ans}=\sum\limits_{l+2\le i\le r+2}\begin{pmatrix}\text{Fib}_i\\k\end{pmatrix}</script></p><script type="math/tex; mode=display">\begin{align*}    \text{Ans}    =&\sum_{l+2\leq i\leq r+2} \begin{pmatrix}{\text{Fib}_i}\\k\end{pmatrix}\\    =&\frac{1}{k!}\sum_{l+2\le i\le r+2} {\text{Fib}_i}^{\underline{k}}\\    =&\frac{1}{k!}\sum_{l+2\le i\le r+2}\sum_{1\le j\le k}(-1)^{k-j}\begin{bmatrix}k\\ j \end{bmatrix}{\text{Fib}_i}^j\\    =&\frac{1}{k!}\sum_{1\le i\le k}(-1)^{k-i}\begin{bmatrix}k\\ i \end{bmatrix}\sum_{l+2\le j\le r+2}{\text{Fib}_j}^i\end{align*}</script><p>考虑带入斐波那契数的通项，令 $A=\frac{1+\sqrt{5}}{2}, B=\frac{1-\sqrt{5}}{2}$</p><script type="math/tex; mode=display">\begin{align*}    \text{Ans}    =&\frac{1}{k!}\sum_{1\le i\le k}(-1)^{k-i}\begin{bmatrix}k\\ i \end{bmatrix}\sum_{l+2\le j\le r+2}[{\frac{1}{\sqrt{5}}(A^j-B^j)}]^i\\    =&\frac{1}{k!}\sum_{1\le i\le k}(-1)^{k-i}\begin{bmatrix}k\\ i \end{bmatrix}(\frac{1}{\sqrt{5}})^i\sum_{l+2\le j\le r+2}\sum_{0\le p\le i}\begin{pmatrix}i\\p\end{pmatrix}(-1)^p(A^{i-p}B^p)^j\\    =&\frac{1}{k!}\sum_{1\le i\le k}(-1)^{k-i}\begin{bmatrix}k\\ i \end{bmatrix}(\frac{1}{\sqrt{5}})^i\sum_{0\le j\le i}\begin{pmatrix}i\\j\end{pmatrix}(-1)^j\sum_{l+2\le p\le r+2}(A^{i-j}B^j)^p\end{align*}</script><p>我们可以通过等比数列求和快速计算式子后面部分<br>$\Theta(k^2\times(\log l+\log r))$</p><h2 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h2><p>本题涉及对 $\sqrt{5}$ 的计算，然而在模 $10^9+7$ 意义下 $5$ 没有二次剩余，因此我们用扩域解决<br>代码 <a href="http://codeforces.com/contest/717/submission/137205589">codeforces submission 137205589</a></p>]]></content>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;题意&quot;&gt;&lt;a href=&quot;#题意&quot; class=&quot;headerlink&quot; title=&quot;题意&quot;&gt;&lt;/a&gt;题意&lt;/h2&gt;&lt;p&gt;一个合法的串定义为：长度在 $[l, r]$ 之间，且只含 $0,1$，并且不存在连续 $2$ 个或更多的 $0$.&lt;/p&gt;
+&lt;p&gt;现在要选出 $k$ 个长度相同的不同的合法的串，问有几种选法，答案模 $10^9+7$.&lt;/p&gt;
+&lt;p&gt;$1\le l\le r\le10^{18}, 1\le k\le200$.&lt;br&gt;</summary>
+    
+    
+    
+    <category term="solution" scheme="https://gzezfisher.top/categories/solution/"/>
+    
+    
+    <category term="斯特林数, 二项式定理, 斐波那契数列" scheme="https://gzezfisher.top/tags/%E6%96%AF%E7%89%B9%E6%9E%97%E6%95%B0-%E4%BA%8C%E9%A1%B9%E5%BC%8F%E5%AE%9A%E7%90%86-%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97/"/>
+    
+  </entry>
+  
+</feed>
