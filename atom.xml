@@ -6,7 +6,7 @@
   <link href="https://gzezfisher.top/atom.xml" rel="self"/>
   
   <link href="https://gzezfisher.top/"/>
-  <updated>2022-01-27T09:27:23.040Z</updated>
+  <updated>2022-01-27T12:40:35.960Z</updated>
   <id>https://gzezfisher.top/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CF1118F2 Tree Cutting (Hard Version)</title>
+    <link href="https://gzezfisher.top/2022/01/27/cf1118f2/"/>
+    <id>https://gzezfisher.top/2022/01/27/cf1118f2/</id>
+    <published>2022-01-27T09:39:09.000Z</published>
+    <updated>2022-01-27T12:40:35.960Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>给定一个有 $n$ 个节点的树，节点可能有颜色，共 $k$ 种颜色，编号 $1…k$，保证每种颜色都出现. 有的点没有颜色，用 $0$ 表示. 将其划分为 $k$ 个联通块，是每个联通块中有且仅有一种颜色，颜色为 $0$ 的节点可以在任意联通块中. 求有多少中划分的方案.<br>$2\le k\le n\le 3\times 10^5$，答案对 $998244353$ 取模.<br><span id="more"></span></p><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>我们称将一个点划归一个有且仅有颜色 $c$ 的联通块为将这个点染上颜色 $c$<br>显然有一些点的染色是确定的，一些点可以染上多种颜色，其中确定染上颜色 $c$ 的点是所有颜色为 $c$ 的点与它们的LCA的路径上的点，证明显然</p><p>我们先按照如下流程将这些颜色确定的点染色：</p><ol><li>找出同一颜色 $c$ 的点的LCA</li><li>依次从每个点开始往父亲上跳，一边跳一边染色</li><li>跳到一个点已经染色或已经到达LCA即可停止，如果跳到的点已经染上颜色且不为 $c$ 则两种颜色构成的联通块必然重叠，即没有合法方案</li></ol><p>接下来考虑树形DP<br>令 $f_{u,0}$ 表示在以 $u$ 为根的子树中，最上方联通块不包含已染色点的方案数，$f_{u,1}$ 表示在以 $u$ 为根的子树中，最上方联通块包含已染色点的方案数，$c_u$ 表示点 $u$ 的颜色</p><p>我们分两种情况讨论转移：</p><ol><li><p>$c_u\not=0$<br>显然 $f_{u, 0}=0$<br>对于 $f_{u, 1}$，再分情况讨论：</p><ol><li>$v\in\text{son}_u,c_v\not=0$<br>能够确定边 $(u, v)$ 是否断掉，对 $f_{u, 1}$ 贡献为 $f_{v, 1}=f_{v, 0}+f_{v, 1}$</li><li>$v\in\text{son}_u,c_v=0$<br>若边 $(u, v)$ 断掉，对 $f_{u, 1}$ 贡献为 $f_{v, 1}$，若边不断掉，对 $f_{u, 1}$ 贡献为 $f_{v, 0}$，总贡献为 $f_{v, 0}+f_{v, 1}$</li></ol><p>综上，$f_{u, 1}=\prod\limits_{v\in\text{son}_u}f_{v, 0}+f_{v, 1}$</p></li><li>$c_u=0$<br>类似的，$f_{u, 0}=\prod\limits_{v\in\text{son}_u}f_{v, 0}+f_{v, 1}$<br>对于 $f_{u, 1}$，我们枚举 $u$ 继承哪一个儿子节点的颜色，即 $f_{u, 1}=\sum\limits_{v_1\in\text{son}_u}f_{v_1, 1}\times\prod\limits_{v_2\in\text{son}_u,v_2\not=v_1}f_{v_2, 0}+f_{v_2, 1}$<br>对于这条式子我们维护 $f_{v, 0}+f_{v, 1}$ 的前缀积和后缀积即可</li></ol><p>总的时间复杂度 $\Theta(n)$ 到 $\Theta(n\log n)$，取决于求LCA的算法</p>]]></content>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;题意&quot;&gt;&lt;a href=&quot;#题意&quot; class=&quot;headerlink&quot; title=&quot;题意&quot;&gt;&lt;/a&gt;题意&lt;/h2&gt;&lt;p&gt;给定一个有 $n$ 个节点的树，节点可能有颜色，共 $k$ 种颜色，编号 $1…k$，保证每种颜色都出现. 有的点没有颜色，用 $0$ 表示. 将其划分为 $k$ 个联通块，是每个联通块中有且仅有一种颜色，颜色为 $0$ 的节点可以在任意联通块中. 求有多少中划分的方案.&lt;br&gt;$2\le k\le n\le 3\times 10^5$，答案对 $998244353$ 取模.&lt;br&gt;</summary>
+    
+    
+    
+    <category term="solution" scheme="https://gzezfisher.top/categories/solution/"/>
+    
+    
+    <category term="树形DP" scheme="https://gzezfisher.top/tags/%E6%A0%91%E5%BD%A2DP/"/>
+    
+  </entry>
   
   <entry>
     <title>CF802O April Fools&#39; Problem (hard)</title>
@@ -67,13 +88,12 @@
     <link href="https://gzezfisher.top/2022/01/26/cf717a/"/>
     <id>https://gzezfisher.top/2022/01/26/cf717a/</id>
     <published>2022-01-26T08:34:11.000Z</published>
-    <updated>2022-01-26T14:17:16.956Z</updated>
+    <updated>2022-01-27T09:50:22.892Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>一个合法的串定义为：长度在 $[l, r]$ 之间，且只含 $0,1$，并且不存在连续 $2$ 个或更多的 $0$.<br>现在要选出 $k$ 个长度相同的不同的合法的串，问有几种选法，答案模 $10^9+7$.</p><p>$1\le l\le r\le10^{18}, 1\le k\le200$.<br><span id="more"></span></p><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>设 $F_{i,j}$ 表示长度为 $i$, 以 $j$ 结尾的合法串个数.<br>有 <script type="math/tex">\left\{      \begin{array}{**lr**}      F_{i,0}=F_{i-1,1} &  \\      F_{i,1}=F_{i-1,0}+F_{i-1,1} &     \end{array}  \right.</script><br>即 <script type="math/tex">\left\{      \begin{array}{**lr**}      F_{i,0}=\text{Fib}_{i} &  \\      F_{i,1}=\text{Fib}_{i+1} &     \end{array}  \right.</script><br>所以答案 <script type="math/tex">\text{Ans}=\sum\limits_{l+2\le i\le r+2}\begin{pmatrix}\text{Fib}_i\\k\end{pmatrix}</script></p><script type="math/tex; mode=display">\begin{align*}    \text{Ans}    =&\sum_{l+2\leq i\leq r+2} \begin{pmatrix}{\text{Fib}_i}\\k\end{pmatrix}\\    =&\frac{1}{k!}\sum_{l+2\le i\le r+2} {\text{Fib}_i}^{\underline{k}}\\    =&\frac{1}{k!}\sum_{l+2\le i\le r+2}\sum_{1\le j\le k}(-1)^{k-j}\begin{bmatrix}k\\ j \end{bmatrix}{\text{Fib}_i}^j\\    =&\frac{1}{k!}\sum_{1\le i\le k}(-1)^{k-i}\begin{bmatrix}k\\ i \end{bmatrix}\sum_{l+2\le j\le r+2}{\text{Fib}_j}^i\end{align*}</script><p>考虑带入斐波那契数的通项，令 $A=\frac{1+\sqrt{5}}{2}, B=\frac{1-\sqrt{5}}{2}$</p><script type="math/tex; mode=display">\begin{align*}    \text{Ans}    =&\frac{1}{k!}\sum_{1\le i\le k}(-1)^{k-i}\begin{bmatrix}k\\ i \end{bmatrix}\sum_{l+2\le j\le r+2}[{\frac{1}{\sqrt{5}}(A^j-B^j)}]^i\\    =&\frac{1}{k!}\sum_{1\le i\le k}(-1)^{k-i}\begin{bmatrix}k\\ i \end{bmatrix}(\frac{1}{\sqrt{5}})^i\sum_{l+2\le j\le r+2}\sum_{0\le p\le i}\begin{pmatrix}i\\p\end{pmatrix}(-1)^p(A^{i-p}B^p)^j\\    =&\frac{1}{k!}\sum_{1\le i\le k}(-1)^{k-i}\begin{bmatrix}k\\ i \end{bmatrix}(\frac{1}{\sqrt{5}})^i\sum_{0\le j\le i}\begin{pmatrix}i\\j\end{pmatrix}(-1)^j\sum_{l+2\le p\le r+2}(A^{i-j}B^j)^p\end{align*}</script><p>等比数列求和快速计算式子后面部分<br>$\Theta(k^2\times(\log l+\log r))$</p><h2 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h2><p>本题涉及对 $\sqrt{5}$ 的计算，然而在模 $10^9+7$ 意义下 $5$ 没有二次剩余，我们用扩域解决<br>代码 <a href="http://codeforces.com/contest/717/submission/137205589">codeforces submission 137205589</a></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>一个合法的串定义为：长度在 $[l, r]$ 之间，且只含 $0,1$，并且不存在连续 $2$ 个或更多的 $0$.<br>现在要选出 $k$ 个长度相同的不同的合法的串，问有几种选法，答案模 $10^9+7$.<br>$1\le l\le r\le10^{18}, 1\le k\le200$.<br><span id="more"></span></p><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>设 $F_{i,j}$ 表示长度为 $i$, 以 $j$ 结尾的合法串个数.<br>有 <script type="math/tex">\left\{      \begin{array}{**lr**}      F_{i,0}=F_{i-1,1} &  \\      F_{i,1}=F_{i-1,0}+F_{i-1,1} &     \end{array}  \right.</script><br>即 <script type="math/tex">\left\{      \begin{array}{**lr**}      F_{i,0}=\text{Fib}_{i} &  \\      F_{i,1}=\text{Fib}_{i+1} &     \end{array}  \right.</script><br>所以答案 <script type="math/tex">\text{Ans}=\sum\limits_{l+2\le i\le r+2}\begin{pmatrix}\text{Fib}_i\\k\end{pmatrix}</script></p><script type="math/tex; mode=display">\begin{align*}    \text{Ans}    =&\sum_{l+2\leq i\leq r+2} \begin{pmatrix}{\text{Fib}_i}\\k\end{pmatrix}\\    =&\frac{1}{k!}\sum_{l+2\le i\le r+2} {\text{Fib}_i}^{\underline{k}}\\    =&\frac{1}{k!}\sum_{l+2\le i\le r+2}\sum_{1\le j\le k}(-1)^{k-j}\begin{bmatrix}k\\ j \end{bmatrix}{\text{Fib}_i}^j\\    =&\frac{1}{k!}\sum_{1\le i\le k}(-1)^{k-i}\begin{bmatrix}k\\ i \end{bmatrix}\sum_{l+2\le j\le r+2}{\text{Fib}_j}^i\end{align*}</script><p>考虑带入斐波那契数的通项，令 $A=\frac{1+\sqrt{5}}{2}, B=\frac{1-\sqrt{5}}{2}$</p><script type="math/tex; mode=display">\begin{align*}    \text{Ans}    =&\frac{1}{k!}\sum_{1\le i\le k}(-1)^{k-i}\begin{bmatrix}k\\ i \end{bmatrix}\sum_{l+2\le j\le r+2}[{\frac{1}{\sqrt{5}}(A^j-B^j)}]^i\\    =&\frac{1}{k!}\sum_{1\le i\le k}(-1)^{k-i}\begin{bmatrix}k\\ i \end{bmatrix}(\frac{1}{\sqrt{5}})^i\sum_{l+2\le j\le r+2}\sum_{0\le p\le i}\begin{pmatrix}i\\p\end{pmatrix}(-1)^p(A^{i-p}B^p)^j\\    =&\frac{1}{k!}\sum_{1\le i\le k}(-1)^{k-i}\begin{bmatrix}k\\ i \end{bmatrix}(\frac{1}{\sqrt{5}})^i\sum_{0\le j\le i}\begin{pmatrix}i\\j\end{pmatrix}(-1)^j\sum_{l+2\le p\le r+2}(A^{i-j}B^j)^p\end{align*}</script><p>等比数列求和快速计算式子后面部分<br>$\Theta(k^2\times(\log l+\log r))$</p><h2 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h2><p>本题涉及对 $\sqrt{5}$ 的计算，然而在模 $10^9+7$ 意义下 $5$ 没有二次剩余，我们用扩域解决<br>代码 <a href="http://codeforces.com/contest/717/submission/137205589">codeforces submission 137205589</a></p>]]></content>
     
     
-    <summary type="html">&lt;h2 id=&quot;题意&quot;&gt;&lt;a href=&quot;#题意&quot; class=&quot;headerlink&quot; title=&quot;题意&quot;&gt;&lt;/a&gt;题意&lt;/h2&gt;&lt;p&gt;一个合法的串定义为：长度在 $[l, r]$ 之间，且只含 $0,1$，并且不存在连续 $2$ 个或更多的 $0$.&lt;br&gt;现在要选出 $k$ 个长度相同的不同的合法的串，问有几种选法，答案模 $10^9+7$.&lt;/p&gt;
-&lt;p&gt;$1\le l\le r\le10^{18}, 1\le k\le200$.&lt;br&gt;</summary>
+    <summary type="html">&lt;h2 id=&quot;题意&quot;&gt;&lt;a href=&quot;#题意&quot; class=&quot;headerlink&quot; title=&quot;题意&quot;&gt;&lt;/a&gt;题意&lt;/h2&gt;&lt;p&gt;一个合法的串定义为：长度在 $[l, r]$ 之间，且只含 $0,1$，并且不存在连续 $2$ 个或更多的 $0$.&lt;br&gt;现在要选出 $k$ 个长度相同的不同的合法的串，问有几种选法，答案模 $10^9+7$.&lt;br&gt;$1\le l\le r\le10^{18}, 1\le k\le200$.&lt;br&gt;</summary>
     
     
     
