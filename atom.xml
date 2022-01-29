@@ -34,13 +34,13 @@
     <category term="根号算法" scheme="https://gzezfisher.top/categories/%E6%A0%B9%E5%8F%B7%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="根号分治" scheme="https://gzezfisher.top/tags/%E6%A0%B9%E5%8F%B7%E5%88%86%E6%B2%BB/"/>
-    
     <category term="贪心" scheme="https://gzezfisher.top/tags/%E8%B4%AA%E5%BF%83/"/>
     
     <category term="二分" scheme="https://gzezfisher.top/tags/%E4%BA%8C%E5%88%86/"/>
     
     <category term="除法分块" scheme="https://gzezfisher.top/tags/%E9%99%A4%E6%B3%95%E5%88%86%E5%9D%97/"/>
+    
+    <category term="根号分治" scheme="https://gzezfisher.top/tags/%E6%A0%B9%E5%8F%B7%E5%88%86%E6%B2%BB/"/>
     
   </entry>
   
@@ -59,11 +59,11 @@
     
     
     
+    <category term="根号算法" scheme="https://gzezfisher.top/categories/%E6%A0%B9%E5%8F%B7%E7%AE%97%E6%B3%95/"/>
+    
     <category term="字符串" scheme="https://gzezfisher.top/categories/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
     
     <category term="AC自动机" scheme="https://gzezfisher.top/categories/%E5%AD%97%E7%AC%A6%E4%B8%B2/AC%E8%87%AA%E5%8A%A8%E6%9C%BA/"/>
-    
-    <category term="根号算法" scheme="https://gzezfisher.top/categories/%E6%A0%B9%E5%8F%B7%E7%AE%97%E6%B3%95/"/>
     
     
     <category term="根号分治" scheme="https://gzezfisher.top/tags/%E6%A0%B9%E5%8F%B7%E5%88%86%E6%B2%BB/"/>
@@ -117,13 +117,13 @@
     
     <category term="题解" scheme="https://gzezfisher.top/categories/%E9%A2%98%E8%A7%A3/"/>
     
-    <category term="数据结构" scheme="https://gzezfisher.top/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-    <category term="线段树" scheme="https://gzezfisher.top/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
-    
     <category term="图论" scheme="https://gzezfisher.top/categories/%E5%9B%BE%E8%AE%BA/"/>
     
     <category term="网络流" scheme="https://gzezfisher.top/categories/%E5%9B%BE%E8%AE%BA/%E7%BD%91%E7%BB%9C%E6%B5%81/"/>
+    
+    <category term="数据结构" scheme="https://gzezfisher.top/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    <category term="线段树" scheme="https://gzezfisher.top/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
     
     
     <category term="网络流" scheme="https://gzezfisher.top/tags/%E7%BD%91%E7%BB%9C%E6%B5%81/"/>
@@ -150,9 +150,9 @@
     
     <category term="树" scheme="https://gzezfisher.top/categories/%E6%A0%91/"/>
     
-    <category term="多项式" scheme="https://gzezfisher.top/categories/%E5%A4%9A%E9%A1%B9%E5%BC%8F/"/>
-    
     <category term="树形DP" scheme="https://gzezfisher.top/categories/%E6%A0%91/%E6%A0%91%E5%BD%A2DP/"/>
+    
+    <category term="多项式" scheme="https://gzezfisher.top/categories/%E5%A4%9A%E9%A1%B9%E5%BC%8F/"/>
     
     
     <category term="树形DP" scheme="https://gzezfisher.top/tags/%E6%A0%91%E5%BD%A2DP/"/>
@@ -207,9 +207,9 @@
     
     <category term="数学" scheme="https://gzezfisher.top/categories/%E6%95%B0%E5%AD%A6/"/>
     
-    <category term="组合" scheme="https://gzezfisher.top/categories/%E6%95%B0%E5%AD%A6/%E7%BB%84%E5%90%88/"/>
-    
     <category term="数论" scheme="https://gzezfisher.top/categories/%E6%95%B0%E5%AD%A6/%E6%95%B0%E8%AE%BA/"/>
+    
+    <category term="组合" scheme="https://gzezfisher.top/categories/%E6%95%B0%E5%AD%A6/%E7%BB%84%E5%90%88/"/>
     
     
     <category term="二项式定理" scheme="https://gzezfisher.top/tags/%E4%BA%8C%E9%A1%B9%E5%BC%8F%E5%AE%9A%E7%90%86/"/>
