@@ -6,7 +6,7 @@
   <link href="https://gzezfisher.top/atom.xml" rel="self"/>
   
   <link href="https://gzezfisher.top/"/>
-  <updated>2022-02-01T06:19:20.621Z</updated>
+  <updated>2022-02-01T13:41:35.229Z</updated>
   <id>https://gzezfisher.top/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CF1633E Spanning Tree Queries</title>
+    <link href="https://gzezfisher.top/2022/02/01/cf1633e/"/>
+    <id>https://gzezfisher.top/2022/02/01/cf1633e/</id>
+    <published>2022-02-01T13:00:00.000Z</published>
+    <updated>2022-02-01T13:41:35.229Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>有一个由 $n$ 个点 $m$ 条边组成的无向带权联通图，有 $k$ 个询问.<br>每次询问给出一个 $x$，对于每一条边，重新定义边权为 $|w-x|$ ($w$ 为原边权)，求新图上的最小生成树的边权和</p><p>$n\le 50, m\le 300, k\le 10^7$<br><span id="more"></span></p><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>发现存在区间使得 $x$ 在区间内变化时，边权和可以表示为 $a+bx$，其中 $a$，$b$ 为常数</p><p>这样的区间需要满足的性质是，当 $x$ 在区间内变化时，图上的每条边大小关系都不会改变 (由kruskal)，且原边权 $w$ 与 $x$ 的大小关系不会改变</p><p>显然这样的区间个数是 $\mathcal{O}(m^2)$ 级别的，下面给出证明</p><p>我们构造这样的区间<br>称每个区间的右端点为临界点，令临界点 $r$ 满足</p><script type="math/tex; mode=display">\exists |w_i-r|>|w_j-r|\land|w_i-(j+1)|\le|w_j-(j+1)|\lor\exists w_i\ge r\land w_i<r+1</script><p>即 $r=\lfloor\frac{w_i+w_j-1}{2}\rfloor\lor r=w_i$<br>对所有临界点排序，相邻两个临界点 $r_1, r_2$ 之间的区间 $(r_1, r_2]$ 就是我们所构造的区间，显然这样的区间是满足上面条件的<br>不同的 $r$ 只有 $\mathcal{O}(m^2)$ 种，对应的区间个数也只有 $\mathcal{O}(m^2)$ 个</p><p>按证明中的构造方法构造出所有区间<br>对于每个区间，打开边权的绝对值，然后含参跑kruskal，得到 $a+bx$ 形式的答案<br>查询时二分 $x$ 所在的区间，带入 $x$ 求值即可</p><p>总的时间复杂度为 $\mathcal{O}(m^3+k)$</p><p>代码 <a href="http://codeforces.com/contest/1633/submission/144838318">codeforces submission 144838318</a></p>]]></content>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;题意&quot;&gt;&lt;a href=&quot;#题意&quot; class=&quot;headerlink&quot; title=&quot;题意&quot;&gt;&lt;/a&gt;题意&lt;/h2&gt;&lt;p&gt;有一个由 $n$ 个点 $m$ 条边组成的无向带权联通图，有 $k$ 个询问.&lt;br&gt;每次询问给出一个 $x$，对于每一条边，重新定义边权为 $|w-x|$ ($w$ 为原边权)，求新图上的最小生成树的边权和&lt;/p&gt;
+&lt;p&gt;$n\le 50, m\le 300, k\le 10^7$&lt;br&gt;</summary>
+    
+    
+    
+    <category term="图论" scheme="https://gzezfisher.top/categories/%E5%9B%BE%E8%AE%BA/"/>
+    
+    <category term="最小生成树" scheme="https://gzezfisher.top/categories/%E5%9B%BE%E8%AE%BA/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/"/>
+    
+    
+    <category term="最小生成树" scheme="https://gzezfisher.top/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/"/>
+    
+  </entry>
   
   <entry>
     <title>LUOGU P4119 Ynoi2018 未来日记</title>
