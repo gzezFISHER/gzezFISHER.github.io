@@ -6,7 +6,7 @@
   <link href="https://gzezfisher.top/atom.xml" rel="self"/>
   
   <link href="https://gzezfisher.top/"/>
-  <updated>2022-02-01T14:09:47.427Z</updated>
+  <updated>2022-02-02T03:19:19.578Z</updated>
   <id>https://gzezfisher.top/</id>
   
   <author>
@@ -17,15 +17,58 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>cf442d</title>
+    <title>CF1458C Latin Square</title>
+    <link href="https://gzezfisher.top/2022/02/02/cf1458c/"/>
+    <id>https://gzezfisher.top/2022/02/02/cf1458c/</id>
+    <published>2022-02-02T00:27:37.000Z</published>
+    <updated>2022-02-02T03:19:19.578Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>给出一个 $n\times n$ 的矩阵，每行每列都是一个 $[1, n]$ 的排列，有 $m$ 次操作</p><ul><li><code>U</code> 表示整个矩阵循环下移一格</li><li><code>D</code> 表示整个矩阵循环上移一格</li><li><code>L</code> 表示整个矩阵循环左移一格</li><li><code>R</code> 表示整个矩阵循环右移一格</li><li><code>I</code> 表示把矩阵每一行变为原来排列的逆</li><li><code>R</code> 表示把矩阵每一列变为原来排列的逆</li></ul><p>多组测试数据，$1\le T\le 1000$，$1\le n, m$，$\sum n\le 1000,\sum m\le 10^5$<br><span id="more"></span></p><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>考虑排列逆的含义</p><p>一个排列 $a$ 可以表示为若干个点 $(i, a_i)$<br>根根据排列逆的定义，我们可以发现 $a$ 的逆 $a^{-1}$ 可以表示为若干个点 $(a_i, i)$，即交换 $xy$ 坐标</p><p>对于矩阵 $a$ 我们把它表示为若干个三维的点 $(i, j, a_{i, j})$<br><code>I</code> 操作对应交换 $yz$ 坐标<br><code>C</code> 操作对应交换 $xz$ 坐标</p><p>剩下的操作也很好办<br><code>U</code> 操作对应所有 $x$ 坐标-1<br><code>D</code> 操作对应所有 $x$ 坐标+1<br><code>L</code> 操作对应所有 $y$ 坐标-1<br><code>R</code> 操作对应所有 $y$ 坐标+1</p><p>维护各个坐标对应的初始时的坐标和各个坐标的变化量即可</p><p>总时间复杂度为 $\Theta(n^2+m)$</p><p>代码 <a href="https://codeforces.com/contest/1458/submission/142751178">codeforces submission 142751178</a></p>]]></content>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;题意&quot;&gt;&lt;a href=&quot;#题意&quot; class=&quot;headerlink&quot; title=&quot;题意&quot;&gt;&lt;/a&gt;题意&lt;/h2&gt;&lt;p&gt;给出一个 $n\times n$ 的矩阵，每行每列都是一个 $[1, n]$ 的排列，有 $m$ 次操作&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;U&lt;/code&gt; 表示整个矩阵循环下移一格&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;D&lt;/code&gt; 表示整个矩阵循环上移一格&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;L&lt;/code&gt; 表示整个矩阵循环左移一格&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;R&lt;/code&gt; 表示整个矩阵循环右移一格&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;I&lt;/code&gt; 表示把矩阵每一行变为原来排列的逆&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;R&lt;/code&gt; 表示把矩阵每一列变为原来排列的逆&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;多组测试数据，$1\le T\le 1000$，$1\le n, m$，$\sum n\le 1000,\sum m\le 10^5$&lt;br&gt;</summary>
+    
+    
+    
+    <category term="数学" scheme="https://gzezfisher.top/categories/%E6%95%B0%E5%AD%A6/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>CF442D Adam and Tree</title>
     <link href="https://gzezfisher.top/2022/02/01/cf442d/"/>
     <id>https://gzezfisher.top/2022/02/01/cf442d/</id>
     <published>2022-02-01T14:09:47.000Z</published>
-    <updated>2022-02-01T14:09:47.427Z</updated>
+    <updated>2022-02-02T04:03:32.463Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>彩色树是边有颜色的有根树，其中每一种颜色的边集构成一条链.<br>定义一棵彩色树的权值为所有节点到根节点路径上不同颜色的数量的最大值.<br>现在有一棵不断变化的树，一开始只有1号点 (根节点)，接下来每个时刻长出一个新点，求每一时刻树的权值</p><p>长出的节点数 $n\le10^5$<br><span id="more"></span></p><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>先考虑树静止时怎么做</p><p>发现必然存在一种最优方案，其中任意一种颜色的边集构成的链都是以一个点与其祖先为顶点的链，证明显然</p><p>令 $val_u$ 表示点 $u$ 的子树与 $u$ 到父亲的边构成的树的最小权值，显然可以从 $val_v,v\in\text{son}_u$ 转移<br>我们找出 $val_v$ 最大的 $v$ 记为 $maxv_u$，让 $u$ 到其父亲的边继承边 $(u, maxv_u)$ 的颜色，显然这样是最优的<br>即 </p><script type="math/tex; mode=display">val_u=\max\{\max_{v\in\text{son}_u,v\not=maxv_u}val_v+1, val_{maxv_u}\}</script><p>我们记下 $val_v$ 的最大值 $max_u$，非严格次大值 $secmax_u$<br>于是有</p><script type="math/tex; mode=display">val_u=\max\{max_u, secmax_u+1\}</script><p>DP即可，注意答案为 $max_1$</p><p>每次加点，我们从新加的点不断向上更新，这样的时间复杂度是 $\mathcal{O}(n^2)$，不足以通过此题</p><p>考虑做一点小优化<br>我们在向上跳的过程中，如果已经无法更新 $val$，那么再往上跳也无法更新<br>如果已经无法更新 $val$，停下即可</p><p>下面证明这样做复杂度是 $\mathcal{O}(n\log n)$ 的</p><p>时间复杂度即为更新 $val$ 的次数，即 $T(n)=\sum_{1\le i\le n}val_i$<br>$val_i$ 的上界是 $\log_2 n$<br>我们通过构造来证明，实际上并不需要我们自己构造，因为树链剖分已经帮我们构造好了</p><p>代码 <a href="https://codeforces.com/contest/442/submission/144894116">codeforces submission 144894116</a></p>]]></content>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;题意&quot;&gt;&lt;a href=&quot;#题意&quot; class=&quot;headerlink&quot; title=&quot;题意&quot;&gt;&lt;/a&gt;题意&lt;/h2&gt;&lt;p&gt;彩色树是边有颜色的有根树，其中每一种颜色的边集构成一条链.&lt;br&gt;定义一棵彩色树的权值为所有节点到根节点路径上不同颜色的数量的最大值.&lt;br&gt;现在有一棵不断变化的树，一开始只有1号点 (根节点)，接下来每个时刻长出一个新点，求每一时刻树的权值&lt;/p&gt;
+&lt;p&gt;长出的节点数 $n\le10^5$&lt;br&gt;</summary>
     
     
     
+    <category term="树" scheme="https://gzezfisher.top/categories/%E6%A0%91/"/>
     
+    <category term="树形DP" scheme="https://gzezfisher.top/categories/%E6%A0%91/%E6%A0%91%E5%BD%A2DP/"/>
+    
+    <category term="树链剖分" scheme="https://gzezfisher.top/categories/%E6%A0%91/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
+    
+    
+    <category term="树形DP" scheme="https://gzezfisher.top/tags/%E6%A0%91%E5%BD%A2DP/"/>
+    
+    <category term="树链剖分" scheme="https://gzezfisher.top/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
     
   </entry>
   
@@ -34,9 +77,9 @@
     <link href="https://gzezfisher.top/2022/02/01/cf1633e/"/>
     <id>https://gzezfisher.top/2022/02/01/cf1633e/</id>
     <published>2022-02-01T13:00:00.000Z</published>
-    <updated>2022-02-02T00:19:06.562Z</updated>
+    <updated>2022-02-02T00:23:10.888Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>有一个由 $n$ 个点 $m$ 条边组成的无向带权联通图，有 $k$ 个询问.<br>每次询问给出一个 $x$，对于每一条边，重新定义边权为 $|w-x|$ ($w$ 为原边权)，求新图上的最小生成树的边权和</p><p>$n\le 50, m\le 300, k\le 10^7$<br><span id="more"></span></p><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>发现存在区间使得 $x$ 在区间内变化时，边权和可以表示为 $a+bx$，其中 $a$，$b$ 为常数</p><p>这样的区间需要满足的性质是，当 $x$ 在区间内变化时，图上的每条边大小关系都不会改变 (由kruskal)，且原边权 $w$ 与 $x$ 的大小关系不会改变</p><p>显然这样的区间个数是 $\mathcal{O}(m^2)$ 级别的，下面给出证明</p><p>我们构造这样的区间<br>称每个区间的右端点为临界点，令临界点 $r$ 满足</p><script type="math/tex; mode=display">\exists |w_i-r|>|w_j-r|\land|w_i-(j+1)|\le|w_j-(j+1)|\lor\exists w_i\ge r\land w_i<r+1</script><p>即 $r=\lfloor\frac{w_i+w_j-1}{2}\rfloor\lor r=w_i$<br>对所有临界点排序，相邻两个临界点 $r_1, r_2$ 之间的区间 $(r_1, r_2]$ 就是我们所构造的区间，显然这样的区间是满足上面条件的<br>不同的 $r$ 只有 $\mathcal{O}(m^2)$ 种，对应的区间个数也只有 $\mathcal{O}(m^2)$ 个</p><p>按证明中的构造方法构造出所有区间<br>对于每个区间，打开边权的绝对值，然后含参跑kruskal，得到 $a+bx$ 形式的答案<br>查询时二分 $x$ 所在的区间，带入 $x$ 求值即可</p><p>总的时间复杂度为 $\mathcal{O}(m^3\log m+k)$</p><p>代码 <a href="http://codeforces.com/contest/1633/submission/144838318">codeforces submission 144838318</a></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>有一个由 $n$ 个点 $m$ 条边组成的无向带权联通图，有 $k$ 个询问.<br>每次询问给出一个 $x$，对于每一条边，重新定义边权为 $|w-x|$ ($w$ 为原边权)，求新图上的最小生成树的边权和</p><p>$n\le 50, m\le 300, k\le 10^7$<br><span id="more"></span></p><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>发现存在区间使得 $x$ 在区间内变化时，边权和可以表示为 $a+bx$，其中 $a$，$b$ 为常数</p><p>这样的区间需要满足的性质是，当 $x$ 在区间内变化时，图上的每条边大小关系都不会改变 (由kruskal，确定最小生成树上有哪些边)，且原边权 $w$ 与 $x$ 的大小关系不会改变 (可以打开绝对值)</p><p>显然这样的区间个数是 $\mathcal{O}(m^2)$ 级别的，下面给出证明</p><p>我们构造这样的区间<br>称每个区间的右端点为临界点，令临界点 $r$ 满足</p><script type="math/tex; mode=display">\exists |w_i-r|>|w_j-r|\land|w_i-(j+1)|\le|w_j-(j+1)|\lor\exists w_i\ge r\land w_i<r+1</script><p>即 $r=\lfloor\frac{w_i+w_j-1}{2}\rfloor\lor r=w_i$<br>对所有临界点排序，相邻两个临界点 $r_1, r_2$ 之间的区间 $(r_1, r_2]$ 就是我们所构造的区间，显然这样的区间是满足上面条件的<br>不同的 $r$ 只有 $\mathcal{O}(m^2)$ 种，对应的区间个数也只有 $\mathcal{O}(m^2)$ 个</p><p>按证明中的构造方法构造出所有区间<br>对于每个区间，打开边权的绝对值，然后含参跑kruskal，得到 $a+bx$ 形式的答案<br>查询时二分 $x$ 所在的区间，带入 $x$ 求值即可</p><p>总的时间复杂度为 $\mathcal{O}(m^3\log m+k)$</p><p>代码 <a href="http://codeforces.com/contest/1633/submission/144838318">codeforces submission 144838318</a></p>]]></content>
     
     
     <summary type="html">&lt;h2 id=&quot;题意&quot;&gt;&lt;a href=&quot;#题意&quot; class=&quot;headerlink&quot; title=&quot;题意&quot;&gt;&lt;/a&gt;题意&lt;/h2&gt;&lt;p&gt;有一个由 $n$ 个点 $m$ 条边组成的无向带权联通图，有 $k$ 个询问.&lt;br&gt;每次询问给出一个 $x$，对于每一条边，重新定义边权为 $|w-x|$ ($w$ 为原边权)，求新图上的最小生成树的边权和&lt;/p&gt;
