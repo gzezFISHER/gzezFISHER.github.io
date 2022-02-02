@@ -6,7 +6,7 @@
   <link href="https://gzezfisher.top/atom.xml" rel="self"/>
   
   <link href="https://gzezfisher.top/"/>
-  <updated>2022-02-02T03:19:19.578Z</updated>
+  <updated>2022-02-02T09:55:24.397Z</updated>
   <id>https://gzezfisher.top/</id>
   
   <author>
@@ -15,6 +15,40 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CF1436F Sum Over Subsets</title>
+    <link href="https://gzezfisher.top/2022/02/02/cf1436f/"/>
+    <id>https://gzezfisher.top/2022/02/02/cf1436f/</id>
+    <published>2022-02-02T08:07:34.000Z</published>
+    <updated>2022-02-02T09:55:24.397Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>给出一个可重集 $S$，值为 $i$ 的元素有 $freq_i$ 个<br>有两个集合 $A,B$ 满足</p><ul><li>$B\subset A\subseteq S$</li><li>$|B|=|A|-1$</li><li>$\gcd_{x\in A}x=1$</li></ul><p>称这两个集合的权值 $w(A,B)=\sum\limits_{x\in A}x\sum\limits_{y\in B}y$<br>求所有可能的集合对 $(A, B)$ 的权值之和</p><p>$1\le a_i\le10^5,freq_i\le10^9$<br><span id="more"></span></p><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>$\gcd_{x\in A}x=1$ 是一个棘手的条件</p><p>考虑令 $f_i$ 表示满足 $\gcd_{x\in A}x=i$ 时的答案，$g_i$ 表示满足 $i\mid\gcd_{x\in A}x$ 时的答案<br>有 $g_i=\sum\limits_{i\mid j}f_j$<br>求出 $g$ 以后，可以莫比乌斯反演得到 $f$<br>即 $f_i=\sum\limits_{j\mid i}\mu(j)\times g_j$</p><p>所以答案 $\text{Ans}=\sum\limits_{1\le i}\mu(i)\times g_i$</p><p>接下来考虑求 $g_i$</p><p>先构造集合 $S’=\{x|x\in S,i\mid x\}$<br>有</p><script type="math/tex; mode=display">\begin{align*}g_i&=\sum_{B\subset A\subseteq S',|B|=|A|-1}w(A,B)\\&=\sum_{B\subset A\subseteq S',|B|=|A|-1}\sum_{x\in A}\sum_{y\in B}x\times y\end{align*}</script><p>我们考虑每一对 $(x\in A, y\in B)$ 对 $g_i$ 的贡献</p><p>称在集合 $A$ 中但不再集合 $B$ 中的元素为特殊元素，在集合 $A$ 和 $B$ 中的为普通元素<br>分两种情况讨论：</p><ul><li>$x, y$ 是同一个元素<br>显然 $x$ 是普通元素<br>那么我们从剩下 $|S’|-1$ 个元素中选出一个特殊元素，再从剩下的 $|S’|-2$ 个元素中任选若干个作为普通元素<br>有 $(|S’|-1)\times 2^{|S’|-2}$ 种方案，产生 $(|S’|-1)\times 2^{|S’|-2}\times x^2$ 的贡献</li><li>$x, y$ 是不同的<strong>元素</strong>，注意是元素不同，不是值不同<br>显然 $y$ 是普通元素<br>若 $x$ 是普通元素，类似的有 $(|S’|-2)\times 2^{|S’|-3}$ 种方案<br>若 $x$ 是特殊元素，在剩下的 $|S’|-2$ 个元素中任选作为普通元素，有 $s^{|S’|-2}$ 种方案<br>共 $(|S’|-2)\times 2^{|S’|-3}+s^{|S’-2|}$ 种方案，产生贡献 $[(|S’|-2)\times 2^{|S’|-3}+s^{|S’|-2}]\times x\times y$</li></ul><p>回到本题，我们把值相同的元素放在一起考虑<br>相同值 $x$ 之间的贡献有两种</p><ul><li>同元素<br>套用上面同元素的贡献，乘上值为 $x$ 的元素个数即可<br>即有贡献 $(|S’|-1)\times 2^{|S’|-2}\times x^2\times freq_x$</li><li>不同元素<br>套用上面不同元素的贡献<br>即有贡献 $[(|S’|-2)\times 2^{|S’|-3}+s^{|S’|-2}]\times x^2\times freq_x\times (freq_x-1)$</li></ul><p>不同的值 $x, y$ 之间的贡献<br>类似的 $[(|S’|-2)\times 2^{|S’|-3}+s^{|S’|-2}]\times x\times y\times freq_x\times freq_y$</p><p>直接求 $\sum\limits_{x,y\in S’,x\not =y}[(|S’|-2)\times 2^{|S’|-3}+s^{|S’|-2}]\times x\times y\times freq_x\times freq_y$ 显然时间上不能接受</p><p>稍稍转化一下</p><script type="math/tex; mode=display">\begin{align*}&\sum_{x,y\in S',x\not =y}[(|S'|-2)\times 2^{|S'|-3}+s^{|S'|-2}]\times x\times y\times freq_x\times freq_y\\=&[(|S'|-2)\times 2^{|S'|-3}+s^{|S'|-2}]\sum_{x,y\in S',x\not =y}x\times freq_x\times y\times freq_y\\=&[(|S'|-2)\times 2^{|S'|-3}+s^{|S'|-2}][(\sum_{x\in S'}x\times freq_x)^2-\sum_{x\in S'}(x\times freq_x)^2]\end{align*}</script><p>至此我们的到了一个调和级数时间复杂度的算法，即 $\Theta(n\log n)$</p><h2 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h2><p>计算 $|S’|$ 时不要直接模 $998244353$，因为它要放在指数上</p><p>代码 <a href="https://codeforces.com/contest/1436/submission/144913462">codeforces submission 144913462</a></p>]]></content>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;题意&quot;&gt;&lt;a href=&quot;#题意&quot; class=&quot;headerlink&quot; title=&quot;题意&quot;&gt;&lt;/a&gt;题意&lt;/h2&gt;&lt;p&gt;给出一个可重集 $S$，值为 $i$ 的元素有 $freq_i$ 个&lt;br&gt;有两个集合 $A,B$ 满足&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$B\subset A\subseteq S$&lt;/li&gt;
+&lt;li&gt;$|B|=|A|-1$&lt;/li&gt;
+&lt;li&gt;$\gcd_{x\in A}x=1$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;称这两个集合的权值 $w(A,B)=\sum\limits_{x\in A}x\sum\limits_{y\in B}y$&lt;br&gt;求所有可能的集合对 $(A, B)$ 的权值之和&lt;/p&gt;
+&lt;p&gt;$1\le a_i\le10^5,freq_i\le10^9$&lt;br&gt;</summary>
+    
+    
+    
+    <category term="数学" scheme="https://gzezfisher.top/categories/%E6%95%B0%E5%AD%A6/"/>
+    
+    <category term="组合" scheme="https://gzezfisher.top/categories/%E6%95%B0%E5%AD%A6/%E7%BB%84%E5%90%88/"/>
+    
+    <category term="数论" scheme="https://gzezfisher.top/categories/%E6%95%B0%E5%AD%A6/%E6%95%B0%E8%AE%BA/"/>
+    
+    
+    <category term="组合" scheme="https://gzezfisher.top/tags/%E7%BB%84%E5%90%88/"/>
+    
+    <category term="莫比乌斯反演" scheme="https://gzezfisher.top/tags/%E8%8E%AB%E6%AF%94%E4%B9%8C%E6%96%AF%E5%8F%8D%E6%BC%94/"/>
+    
+  </entry>
   
   <entry>
     <title>CF1458C Latin Square</title>
@@ -49,9 +83,9 @@
     <link href="https://gzezfisher.top/2022/02/01/cf442d/"/>
     <id>https://gzezfisher.top/2022/02/01/cf442d/</id>
     <published>2022-02-01T14:09:47.000Z</published>
-    <updated>2022-02-02T04:03:32.463Z</updated>
+    <updated>2022-02-02T08:44:06.060Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>彩色树是边有颜色的有根树，其中每一种颜色的边集构成一条链.<br>定义一棵彩色树的权值为所有节点到根节点路径上不同颜色的数量的最大值.<br>现在有一棵不断变化的树，一开始只有1号点 (根节点)，接下来每个时刻长出一个新点，求每一时刻树的权值</p><p>长出的节点数 $n\le10^5$<br><span id="more"></span></p><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>先考虑树静止时怎么做</p><p>发现必然存在一种最优方案，其中任意一种颜色的边集构成的链都是以一个点与其祖先为顶点的链，证明显然</p><p>令 $val_u$ 表示点 $u$ 的子树与 $u$ 到父亲的边构成的树的最小权值，显然可以从 $val_v,v\in\text{son}_u$ 转移<br>我们找出 $val_v$ 最大的 $v$ 记为 $maxv_u$，让 $u$ 到其父亲的边继承边 $(u, maxv_u)$ 的颜色，显然这样是最优的<br>即 </p><script type="math/tex; mode=display">val_u=\max\{\max_{v\in\text{son}_u,v\not=maxv_u}val_v+1, val_{maxv_u}\}</script><p>我们记下 $val_v$ 的最大值 $max_u$，非严格次大值 $secmax_u$<br>于是有</p><script type="math/tex; mode=display">val_u=\max\{max_u, secmax_u+1\}</script><p>DP即可，注意答案为 $max_1$</p><p>每次加点，我们从新加的点不断向上更新，这样的时间复杂度是 $\mathcal{O}(n^2)$，不足以通过此题</p><p>考虑做一点小优化<br>我们在向上跳的过程中，如果已经无法更新 $val$，那么再往上跳也无法更新<br>如果已经无法更新 $val$，停下即可</p><p>下面证明这样做复杂度是 $\mathcal{O}(n\log n)$ 的</p><p>时间复杂度即为更新 $val$ 的次数，即 $T(n)=\sum_{1\le i\le n}val_i$<br>$val_i$ 的上界是 $\log_2 n$<br>我们通过构造来证明，实际上并不需要我们自己构造，因为树链剖分已经帮我们构造好了</p><p>代码 <a href="https://codeforces.com/contest/442/submission/144894116">codeforces submission 144894116</a></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>彩色树是边有颜色的有根树，其中每一种颜色的边集构成一条链.<br>定义一棵彩色树的权值为所有节点到根节点路径上不同颜色的数量的最大值.<br>现在有一棵不断变化的树，一开始只有1号点 (根节点)，接下来每个时刻长出一个新点，求每一时刻树的权值</p><p>长出的节点数 $n\le10^5$<br><span id="more"></span></p><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>先考虑树静止时怎么做</p><p>发现必然存在一种最优方案，其中任意一种颜色的边集构成的链都是以一个点与其祖先为顶点的链，证明显然</p><p>令 $val_u$ 表示点 $u$ 的子树与 $u$ 到父亲的边构成的树的最小权值，显然可以从 $val_v,v\in\text{son}_u$ 转移<br>我们找出 $val_v$ 最大的 $v$ 记为 $maxv_u$，让 $u$ 到其父亲的边继承边 $(u, maxv_u)$ 的颜色，显然这样是最优的<br>即 </p><script type="math/tex; mode=display">val_u=\max\{\max_{v\in\text{son}_u,v\not=maxv_u}val_v+1, val_{maxv_u}\}</script><p>我们记下 $val_v$ 的最大值 $max_u$，非严格次大值 $secmax_u$<br>于是有</p><script type="math/tex; mode=display">val_u=\max\{max_u, secmax_u+1\}</script><p>DP即可，注意答案为 $max_1$</p><p>每次加点，我们从新加的点不断向上更新，这样的时间复杂度是 $\mathcal{O}(n^2)$，不足以通过此题</p><p>考虑做一点小优化<br>我们在向上跳的过程中，如果已经无法更新 $val$，那么再往上跳也无法更新<br>如果已经无法更新 $val$，停下即可</p><p>下面证明这样做复杂度是 $\mathcal{O}(n\log n)$ 的</p><p>时间复杂度即为更新 $val$ 的次数，即 $T(n)=\sum\limits_{1\le i\le n}val_i$<br>$val_i$ 的上界是 $\log_2 n$<br>我们通过构造来证明，实际上并不需要我们自己构造，因为树链剖分已经帮我们构造好了</p><p>代码 <a href="https://codeforces.com/contest/442/submission/144894116">codeforces submission 144894116</a></p>]]></content>
     
     
     <summary type="html">&lt;h2 id=&quot;题意&quot;&gt;&lt;a href=&quot;#题意&quot; class=&quot;headerlink&quot; title=&quot;题意&quot;&gt;&lt;/a&gt;题意&lt;/h2&gt;&lt;p&gt;彩色树是边有颜色的有根树，其中每一种颜色的边集构成一条链.&lt;br&gt;定义一棵彩色树的权值为所有节点到根节点路径上不同颜色的数量的最大值.&lt;br&gt;现在有一棵不断变化的树，一开始只有1号点 (根节点)，接下来每个时刻长出一个新点，求每一时刻树的权值&lt;/p&gt;
@@ -282,9 +316,9 @@
     <link href="https://gzezfisher.top/2022/01/26/cf997d/"/>
     <id>https://gzezfisher.top/2022/01/26/cf997d/</id>
     <published>2022-01-26T11:30:05.000Z</published>
-    <updated>2022-01-30T12:14:38.700Z</updated>
+    <updated>2022-02-02T08:45:06.876Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>给你大小为 $n_1, n_2$​的两棵树 $T_1, T_2$​，构造一张新图，该图中每一个点的编号为 $(u,v)$。如果在 $T_1$ ​中， $u_1$ ​和$u_2$ ​之间有边，那么在该图上，对于任意 $1\le v\le n_2$，$(u_1, v)$ 和 $(u_2, v)$ 之间有边。同样，如果在 $T_2$ ​中，$v_1$ ​和$v_2$​之间有边，那么在图上，对于任意 $1\le u\le n_1$，$(u, v_1)$ 和 $(u, v_2)$ 之间有边.<br>求这个图上长度为 $K$ 的环有多少个，环可以不为简单环，起始点或方向不同的环视为不同的环.</p><p>$n_1, n_2\le 4000, K\le 75$，答案对 $998244353$ 取模.<br><span id="more"></span></p><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>$T_1$ 上一个长度为 $K_1$ 的环和 $T_2$ 上一个长度为 $K_2$ 的环以不同方式组合对应图上 $\begin{pmatrix}K_1+K_2\\k_1\end{pmatrix}$ 个环<br>即答案为 $\sum\limits_{0\le i\le K}F1_i\times F2_{K-i}\times\begin{pmatrix}K\\i\end{pmatrix}$，其中 $F1_i$ 表示 $T_1$ 上长度为 $i$ 的环的个数，$F2_i$ 表示 $T_2$ 上长度为 $i$ 的环的个数</p><p>我们把每个点作为起始点分别计算，考虑到树上所有的环长度均为偶数，令 $f_{u, k}$ 表示以 $u$ 为起始点，长度为 $2\times k$ 的环的个数，有 $F_{2\times k}=\sum\limits_u f_{u, k}$<br>由于从父亲节点往儿子节点转移十分困难，不妨对于每个点只考虑在其子树中的环然后换根DP<br>考虑转移</p><script type="math/tex; mode=display">f_{u,k}=\sum_{0\le t<k}f_{u,t}\sum_{v\in \text{son}_u}f_{v,k-t-1}</script><p>令 $h_{u,k}=\sum_{v\in \text{son}_u}f_{v,k-t-1}$，有</p><script type="math/tex; mode=display">f_{u,k}=\sum_{0\le t<k}f_{u,t}\times h_{u, k-t-1}</script><p>换根DP维护 $h$，再通过 $h$ 计算 $f$<br>$\Theta((n_1+n_2)\times K^2)$ 足以通过此题</p><p>代码 <a href="http://codeforces.com/contest/997/submission/143516835">codeforces submission 143516835</a></p><h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>复杂度瓶颈在 $f$ 的计算，考虑优化这一过程</p><p>令 $h’_{u,k}=h_{u,k-1}$，有</p><script type="math/tex; mode=display">f_{u,k}=\sum_{0\le t<k}f_{u,t}\times h'_{u,k-t}</script><p>令$G_u(x)=\sum_{1\le i\le k}h’_{u,i}\times x^i$，有</p><script type="math/tex; mode=display">\begin{align*}f_{u,k}&=[x^k]\sum_{1\le i\le k}G_u(x)^i\\&=[x^k]\frac{G_u(x)^{k+1}-G_u(x)}{G_u(x)-1}\end{align*}</script><p>多项式快速幂和求逆可以做到 $\Theta((n_1+n_2)K\log K)$ 的复杂度</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>给你大小为 $n_1, n_2$​的两棵树 $T_1, T_2$​，构造一张新图，该图中每一个点的编号为 $(u,v)$。如果在 $T_1$ ​中， $u_1$ ​和$u_2$ ​之间有边，那么在该图上，对于任意 $1\le v\le n_2$，$(u_1, v)$ 和 $(u_2, v)$ 之间有边。同样，如果在 $T_2$ ​中，$v_1$ ​和$v_2$​之间有边，那么在图上，对于任意 $1\le u\le n_1$，$(u, v_1)$ 和 $(u, v_2)$ 之间有边.<br>求这个图上长度为 $K$ 的环有多少个，环可以不为简单环，起始点或方向不同的环视为不同的环.</p><p>$n_1, n_2\le 4000, K\le 75$，答案对 $998244353$ 取模.<br><span id="more"></span></p><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>$T_1$ 上一个长度为 $K_1$ 的环和 $T_2$ 上一个长度为 $K_2$ 的环以不同方式组合对应图上 $\begin{pmatrix}K_1+K_2\\k_1\end{pmatrix}$ 个环<br>即答案为 $\sum\limits_{0\le i\le K}F1_i\times F2_{K-i}\times\begin{pmatrix}K\\i\end{pmatrix}$，其中 $F1_i$ 表示 $T_1$ 上长度为 $i$ 的环的个数，$F2_i$ 表示 $T_2$ 上长度为 $i$ 的环的个数</p><p>我们把每个点作为起始点分别计算，考虑到树上所有的环长度均为偶数，令 $f_{u, k}$ 表示以 $u$ 为起始点，长度为 $2\times k$ 的环的个数，有 $F_{2\times k}=\sum\limits_u f_{u, k}$<br>由于从父亲节点往儿子节点转移十分困难，不妨对于每个点只考虑在其子树中的环然后换根DP<br>考虑转移</p><script type="math/tex; mode=display">f_{u,k}=\sum_{0\le t<k}f_{u,t}\sum_{v\in \text{son}_u}f_{v,k-t-1}</script><p>令 $h_{u,k}=\sum\limits_{v\in \text{son}_u}f_{v,k-t-1}$，有</p><script type="math/tex; mode=display">f_{u,k}=\sum_{0\le t<k}f_{u,t}\times h_{u, k-t-1}</script><p>换根DP维护 $h$，再通过 $h$ 计算 $f$<br>$\Theta((n_1+n_2)\times K^2)$ 足以通过此题</p><p>代码 <a href="http://codeforces.com/contest/997/submission/143516835">codeforces submission 143516835</a></p><h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>复杂度瓶颈在 $f$ 的计算，考虑优化这一过程</p><p>令 $h’_{u,k}=h_{u,k-1}$，有</p><script type="math/tex; mode=display">f_{u,k}=\sum_{0\le t<k}f_{u,t}\times h'_{u,k-t}</script><p>令$G_u(x)=\sum_{1\le i\le k}h’_{u,i}\times x^i$，有</p><script type="math/tex; mode=display">\begin{align*}f_{u,k}&=[x^k]\sum_{1\le i\le k}G_u(x)^i\\&=[x^k]\frac{G_u(x)^{k+1}-G_u(x)}{G_u(x)-1}\end{align*}</script><p>多项式快速幂和求逆可以做到 $\Theta((n_1+n_2)K\log K)$ 的复杂度</p>]]></content>
     
     
     <summary type="html">&lt;h2 id=&quot;题意&quot;&gt;&lt;a href=&quot;#题意&quot; class=&quot;headerlink&quot; title=&quot;题意&quot;&gt;&lt;/a&gt;题意&lt;/h2&gt;&lt;p&gt;给你大小为 $n_1, n_2$​的两棵树 $T_1, T_2$​，构造一张新图，该图中每一个点的编号为 $(u,v)$。如果在 $T_1$ ​中， $u_1$ ​和$u_2$ ​之间有边，那么在该图上，对于任意 $1\le v\le n_2$，$(u_1, v)$ 和 $(u_2, v)$ 之间有边。同样，如果在 $T_2$ ​中，$v_1$ ​和$v_2$​之间有边，那么在图上，对于任意 $1\le u\le n_1$，$(u, v_1)$ 和 $(u, v_2)$ 之间有边.&lt;br&gt;求这个图上长度为 $K$ 的环有多少个，环可以不为简单环，起始点或方向不同的环视为不同的环.&lt;/p&gt;
