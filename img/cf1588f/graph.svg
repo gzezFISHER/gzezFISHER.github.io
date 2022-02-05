@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="265px" height="265px" viewBox="0 0 265 265" version="1.1">
+<rect width="100%" height="100%" fill="white"/>
 <g id="surface1">
 <path style="fill:none;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-dasharray:5,5;stroke-miterlimit:4;" d="M 133.684788 133.770563 L 109.496138 264.42982 " transform="matrix(0.500945,0,0,0.500945,0,0)"/>
 <path style="fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:4;" d="M -14.997184 7.497997 L -0.000761302 0.00323823 L -14.997773 -7.49801 Z M -14.997184 7.497997 " transform="matrix(-0.0911894,0.492575,-0.492575,-0.0911894,55.946838,126.555358)"/>
