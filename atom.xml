@@ -6,7 +6,7 @@
   <link href="https://gzezfisher.top/atom.xml" rel="self"/>
   
   <link href="https://gzezfisher.top/"/>
-  <updated>2022-02-05T09:44:25.619Z</updated>
+  <updated>2022-02-05T09:45:34.512Z</updated>
   <id>https://gzezfisher.top/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://gzezfisher.top/2022/02/05/cf1610f/"/>
     <id>https://gzezfisher.top/2022/02/05/cf1610f/</id>
     <published>2022-02-05T09:05:47.000Z</published>
-    <updated>2022-02-05T09:44:25.619Z</updated>
+    <updated>2022-02-05T09:45:34.512Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>现在有一个由 $n$ 个节点 $m$ 条边组成的无向图，每条边的边权 $w\in\{1, 2\}$.<br>令 ${d^+}_u$ 表示 $u$ 所有出边的权值和，令 ${d^-}_u$ 表示 $u$ 所有入边的权值和，一个点 $u$ 是好的，当且仅当 $|{d^+}_u-{d^-}_u|=1$<br>给每一条边定向，使得图上好的点最多，输出任意一种方案</p><p>$n,m\le3\times10^5$<br><span id="more"></span></p><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>令 $c_{w, u}$ 表示点 $u$ 边权为 $w$ 的边的个数，$s_{w, u}$ 表示点 $u$ 边权为 $w$ 的出边的数量减去边权为 $w$ 的入边的数量</p><p>显然答案有上界 $\sum\limits_u [c_{1, u}\bmod 2=1]$，我们尝试达到这个上界</p><p>这里考虑经典的欧拉回路的构造方法<br>对两种边权分别考虑，利用欧拉回路的性质，使得 $s_{1, u}$ 和 $s_{2, u}$ 都尽量接近0</p><p>建立新图，对于 $(u, v, w)\in E$，若 $w=1$，则新图上有边 $(u, v)$，否则有边 $(u+n, v+n)$，这些边我们称之为关键边</p><p>接下来分两类讨论：</p><ul><li>$c_{1, u}\bmod 2=c_{2, u}\bmod 2=1$<br>我们除了需要保证 $|s_{1, u}|=|s_{2, u}|=1$，还需要 $\text{sgn}(s_{1, u})\not=\text{sgn}(s_{2, u})$<br>为此我们连边 $(u, u+n)$</li><li>$c_{1, u}\bmod 2=1,c_{2, u}\bmod 2=0$<br>只需保证 $|s_{1, u}|=1,s_{2, u}=0$ 即可，无需额外连边</li></ul><p>为了让新图上存在欧拉回路，我们添加一个节点 $S$，与目前度数为奇数的点，也就是满足 $c_{1, u}\bmod 2=1,c_{2, u}\bmod 2=0$ 或 $c_{1, u}\bmod 2=0,c_{2, u}\bmod 2=1$ 的点与该点连边</p><p>最后跑一边欧拉回路定向，把关键边的方向对应回原图即可</p><p>时间复杂度为 $\Theta(n+m)$</p><p>代码 <a href="https://codeforces.com/contest/1610/submission/145198606">codeforces submission 145198606</a></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>现在有一个由 $n$ 个节点 $m$ 条边组成的无向图，每条边的边权 $w\in\{1, 2\}$.<br>令 ${d^+}_u$ 表示 $u$ 所有出边的权值和，令 ${d^-}_u$ 表示 $u$ 所有入边的权值和，一个点 $u$ 是好的，当且仅当 $|{d^+}_u-{d^-}_u|=1$<br>给每一条边定向，使得图上好的点最多，输出任意一种方案</p><p>$n,m\le3\times10^5$<br><span id="more"></span></p><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>令 $c_{w, u}$ 表示点 $u$ 边权为 $w$ 的边的个数，$s_{w, u}$ 表示点 $u$ 边权为 $w$ 的出边的数量减去边权为 $w$ 的入边的数量</p><p>显然答案有上界 $\sum\limits_u [c_{1, u}\bmod 2=1]$，我们尝试达到这个上界</p><p>这里考虑经典的欧拉回路的构造方法<br>对两种边权分别考虑，利用欧拉回路的性质，使得 $s_{1, u}$ 和 $s_{2, u}$ 都尽量接近0</p><p>建立新图，对于 $(u, v, w)\in E$，若 $w=1$，则新图上有边 $(u, v)$，否则有边 $(u+n, v+n)$，这些边我们称之为关键边</p><p>接下来分两类讨论：</p><ul><li>$c_{1, u}\bmod 2=c_{2, u}\bmod 2=1$<br>我们除了需要保证 $|s_{1, u}|=|s_{2, u}|=1$，还需要 $\text{sgn}(s_{1, u})\not=\text{sgn}(s_{2, u})$<br>为此我们连边 $(u, u+n)$</li><li>$c_{1, u}\bmod 2=1,c_{2, u}\bmod 2=0$<br>只需保证 $|s_{1, u}|=1,s_{2, u}=0$ 即可，无需额外连边</li></ul><p>为了让新图上存在欧拉回路，我们添加一个节点 $S$，与目前度数为奇数的点，也就是满足 $c_{1, u}\bmod 2=1,c_{2, u}\bmod 2=0$ 或 $c_{1, u}\bmod 2=0,c_{2, u}\bmod 2=1$ 的点连边</p><p>最后跑一边欧拉回路定向，把关键边的方向对应回原图即可</p><p>时间复杂度为 $\Theta(n+m)$</p><p>代码 <a href="https://codeforces.com/contest/1610/submission/145198606">codeforces submission 145198606</a></p>]]></content>
     
     
     <summary type="html">&lt;h2 id=&quot;题意&quot;&gt;&lt;a href=&quot;#题意&quot; class=&quot;headerlink&quot; title=&quot;题意&quot;&gt;&lt;/a&gt;题意&lt;/h2&gt;&lt;p&gt;现在有一个由 $n$ 个节点 $m$ 条边组成的无向图，每条边的边权 $w\in\{1, 2\}$.&lt;br&gt;令 ${d^+}_u$ 表示 $u$ 所有出边的权值和，令 ${d^-}_u$ 表示 $u$ 所有入边的权值和，一个点 $u$ 是好的，当且仅当 $|{d^+}_u-{d^-}_u|=1$&lt;br&gt;给每一条边定向，使得图上好的点最多，输出任意一种方案&lt;/p&gt;
