@@ -6,7 +6,7 @@
   <link href="https://gzezfisher.top/atom.xml" rel="self"/>
   
   <link href="https://gzezfisher.top/"/>
-  <updated>2022-02-19T06:31:33.058Z</updated>
+  <updated>2022-03-19T13:09:02.309Z</updated>
   <id>https://gzezfisher.top/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>XSY4313 seq</title>
+    <link href="https://gzezfisher.top/2022/03/19/xsy4313/"/>
+    <id>https://gzezfisher.top/2022/03/19/xsy4313/</id>
+    <published>2022-03-19T12:51:08.000Z</published>
+    <updated>2022-03-19T13:09:02.309Z</updated>
+    
+    <content type="html"><![CDATA[<p>显然有两个 $\log$ 的做法：</p><script type="math/tex; mode=display">\sum_{i\le j\le r_i\\r_j-j<d_i}\text{S}(j,\min\{r_i,r_j\})=\sum_{i\le j\\r_j-j<d_i\\r_j<r_i}\text{S}(j,r_j)+\sum_{i\le j\le r_i\\r_j-j<d_i\\r_j\ge r_i}\text{S}(j,r_i)</script><p>类似三维偏序</p><p>考虑一个阈值 $r_i-d_i$，分别考虑 $j$ 在区间 $[i,r_i-d_i]$ 和 $(r_i-d_i,r_i]$ 的情况</p><script type="math/tex; mode=display">\begin{align*}&\sum_{i\le j\le r_i\\r_j-j<d_i}\text{S}(j,\min\{r_i,r_j\})\\=&\sum_{i\le j\le r_i-d_i\\r_j-j<d_i}\text{S}(j,r_j)+\sum_{r_i-d_i< j\le r_i\\r_j-j<d_i}\text{S}(j,\min\{r_i,r_j\})\\=&\sum_{i\le j\le r_i-d_i\\r_j-j<d_i}\text{S}(j,r_j)+\sum_{r_i-d_i< j\le r_i}\text{S}(j,\min\{r_i,r_j\})-\sum_{r_i-d_i< j\le r_i\\r_j-j\ge d_i}\text{S}(j,r_j)\\=&\sum_{i\le j\le r_i-d_i\\r_j-j<d_i}\text{S}(j,r_j)+\sum_{r_i-d_i< j\le r_i\\r_j\le r_i}\text{S}(j,r_j)+\sum_{r_i-d_i< j\le r_i\\r_j>r_i}\text{S}(j,r_i)-\sum_{r_i-d_i< j\le r_i\\r_j-j\ge d_i}\text{S}(j,r_j)\end{align*}</script><p>这四个东西都可以第一维差分，第二维树状数组做</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;显然有两个 $\log$ 的做法：&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\sum_{i\le j\le r_i\\r_j-j&lt;d_i}\text{S}(j,\min\{r_i,r_j\})=\sum_{i\le j\\r_j-</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>CF1610F Mashtali: a Space Oddysey</title>
